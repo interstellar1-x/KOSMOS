@@ -3,11 +3,9 @@ import { OrbitControls } from "jsm/controls/OrbitControls.js";
 import getStarfield from "./getStarfield.js";
 import { getFresnelMat } from "./getFresnelMat.js";
 
-const PLANETS = "https://threejs.org/examples/textures/planets/";
-
 const TEXTURES = {
   earth: "./earthmap.jpg",
-  clouds: `${PLANETS}earth_clouds_1024.png`,
+  clouds: "./earth_clouds_1024.png",
 };
 
 function loadTextureAsync(loader, url) {

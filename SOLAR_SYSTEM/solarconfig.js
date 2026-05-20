@@ -30,7 +30,7 @@ export const SOLAR_CONFIG = {
       rotationSpeed: 0.02,
       model: '../OBJECTS/EARTH/earth.glb',
       texture: '../OBJECTS/EARTH/earthmap.jpg',
-      clouds: 'https://threejs.org/examples/textures/planets/earth_clouds_1024.png',
+      clouds: '../OBJECTS/EARTH/earth_clouds_1024.png',
       info: 'Our home planet, the only known planet with life.'
     },
     mars: {

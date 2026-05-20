@@ -61,7 +61,7 @@ export function getScenePath(scene, fromScene) {
 export function getPlanetPath(planetKey, fromScene) {
   if (!PLANET_KEYS.includes(planetKey)) return null;
   const prefix = SCENE_UP_PREFIX[fromScene] || '../';
-  return `${prefix}OBJECTS2/${planetKey}/index.html`;
+  return `${prefix}OBJECTS2/${planetKey.toUpperCase()}/index.html`;
 }
 
 /**

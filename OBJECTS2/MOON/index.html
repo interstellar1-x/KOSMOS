@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="../planetHud.css" />
   </head>
   <body>
-    <script type="module" src="main.js"></script>
+    <script type="module" src="./main.js"></script>
 
     <!-- Planet HUD System -->
     <script type="module">
@@ -35,6 +35,7 @@
     <!-- Navigation System -->
     <script type="module">
       import Navigation from '../../shared/navigation.js';
+      import { getPlanetPath } from '../../shared/catalog.js';
       const nav = new Navigation({
         aboutLink: '../../ABOUTPROJECT/index.html',
         currentScene: 'PLANET_DETAIL',
@@ -49,7 +50,7 @@
         btn.type = 'button';
         btn.textContent = 'NEXT';
         btn.addEventListener('click', () => {
-          window.location.href = '../../OBJECTS2/sun/index.html';
+          window.location.href = getPlanetPath('sun', 'PLANET_DETAIL');
         });
         document.querySelector('.nav-buttons').appendChild(btn);
       }
