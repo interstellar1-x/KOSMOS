@@ -1,0 +1,140 @@
+/* ============================================
+   KOSMOS — Site-wide i18n UI
+   Language switch, page titles, footer
+   ============================================ */
+
+/* ----- Language Switch (EN | PL) ----- */
+.kosmos-lang-switch,
+.lang-switch {
+  position: fixed;
+  top: 20px;
+  right: 32px;
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  pointer-events: auto;
+}
+
+.kosmos-lang-btn,
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  padding: 4px 8px;
+  transition: color 0.3s ease;
+}
+
+.kosmos-lang-btn:hover,
+.lang-btn:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.kosmos-lang-btn.active,
+.lang-btn.active {
+  color: #8ed0ff;
+}
+
+.kosmos-lang-divider,
+.lang-divider {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+/* ----- Page title (Milky Way / Solar System) — matches planet HUD title ----- */
+.page-scene-title.planet-hud-title {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.page-scene-title.planet-hud-title h1 {
+  margin: 0;
+  font-family: 'Helvetica', Arial, sans-serif;
+  font-size: clamp(30px, 5vw, 60px);
+  font-weight: 100;
+  letter-spacing: 7px;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.7),
+    0 0 20px rgba(255, 255, 255, 0.5),
+    0 0 40px rgba(100, 150, 255, 0.5);
+  animation: hudTitleFadeIn 1.2s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes hudTitleFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ----- Footer ----- */
+.footer {
+  text-align: center;
+  padding: 60px 24px 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.footer p {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.2);
+  letter-spacing: 1px;
+}
+
+.kosmos-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 99990;
+  padding: 12px 24px 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent);
+  pointer-events: none;
+}
+
+.kosmos-footer p {
+  margin: 0;
+}
+
+body.has-kosmos-footer .nav-buttons {
+  bottom: 52px;
+}
+
+@media (max-width: 768px) {
+  .kosmos-lang-switch,
+  .lang-switch {
+    top: 16px;
+    right: 16px;
+  }
+
+  .page-scene-title.planet-hud-title {
+    top: 4%;
+  }
+
+  .page-scene-title.planet-hud-title h1 {
+    font-size: clamp(24px, 7vw, 48px);
+    letter-spacing: 5px;
+  }
+
+  body.has-kosmos-footer .nav-buttons {
+    bottom: 46px;
+  }
+}

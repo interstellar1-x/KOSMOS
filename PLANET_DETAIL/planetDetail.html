@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planet Detail Demo</title>
+  <link rel="stylesheet" href="./planetDetail.css" />
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.150.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.150.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <script type="module">
+    import { PlanetDetail } from './planetDetail.js';
+
+    const detail = new PlanetDetail();
+    const sampleConfig = {
+      name: 'Earth',
+      radius: 1.0,
+      distance: 10,
+      rotationSpeed: 0.02,
+      model: '../OBJECTS/EARTH/earth.glb',
+      texture: '../OBJECTS/EARTH/earthmap.jpg',
+      bodyType: 'Planet',
+      info: 'Our home planet, the only known planet with life.'
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      detail.showPlanet('earth', sampleConfig);
+    });
+  </script>
+</body>
+</html>

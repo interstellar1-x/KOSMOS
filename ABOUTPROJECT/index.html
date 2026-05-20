@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Kosmos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./css/style.css" />
+  <link rel="stylesheet" href="../shared/navigation.css" />
+  <link rel="stylesheet" href="../shared/i18n.css" />
+</head>
+<body>
+
+  <!-- Language Switch -->
+  <div class="lang-switch">
+    <button class="lang-btn active" data-lang="en">EN</button>
+    <span class="lang-divider">|</span>
+    <button class="lang-btn" data-lang="pl">PL</button>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <a href="#about-me" class="nav-link" data-key="nav.aboutMe">About Me</a>
+    <a href="#about-school" class="nav-link" data-key="nav.aboutSchool">About School</a>
+    <a href="#about-project" class="nav-link" data-key="nav.aboutProject">About Project</a>
+    <a href="#sources" class="nav-link" data-key="nav.sources">Sources</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <h1 class="hero-title">Kosmos </h1>
+    <p class="hero-subtitle" data-key="hero.subtitle">Interactive Universe Explorer</p>
+  </section>
+
+  <!-- About Me -->
+  <section id="about-me" class="section">
+    <h2 class="section-title" data-key="nav.aboutMe">About Me</h2>
+    <div class="section-divider"></div>
+    <div class="about-me-content">
+      <h3 class="about-me-name">Bespalova Solomiia</h3>
+      <p class="about-me-detail" data-key="aboutMe.age">18 years old</p>
+      <p class="about-me-detail" data-key="aboutMe.class">Class 4F</p>
+      <p class="about-me-subtitle" data-key="aboutMe.subtitle">Technician Informatics Student</p>
+      <p class="about-me-description" data-key="aboutMe.description">
+       I am passionate about space, programming, and interactive web technologies. This project combines my interest in astronomy with modern web development and 3D visualization.
+      </p>
+    </div>
+  </section>
+
+  <!-- About School -->
+  <section id="about-school" class="section">
+    <h2 class="section-title" data-key="nav.aboutSchool">About School</h2>
+    <div class="section-divider"></div>
+    <div class="school-content">
+      <h3 class="school-name" data-key="aboutSchool.name">Zespół Szkół im. Jana Kasprowicza</h3>
+      <p class="school-subtitle" data-key="aboutSchool.subtitle">Jelcz-Laskowice</p>
+      <p class="school-description" data-key="aboutSchool.description">
+       Zespół Szkół im. Jana Kasprowicza in Jelcz-Laskowice is a secondary school offering both general and technical education. The school provides study programs in various fields and supports students in developing practical and vocational skills. It also cooperates with external institutions and local partners through educational projects and activities.
+      </p>
+      <div class="school-meta">
+        <span class="school-address" data-key="aboutSchool.address">ul. Techników 26, 55-220 Jelcz-Laskowice</span>
+        <a href="https://zsjelcz.pl" target="_blank" rel="noopener" class="school-link" data-key="aboutSchool.website">zsjelcz.pl</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Project -->
+  <section id="about-project" class="section">
+    <h2 class="section-title" data-key="nav.aboutProject">About Project</h2>
+    <div class="section-divider"></div>
+    <div class="project-content">
+      <h3 class="project-title" data-key="aboutProject.title">Interactive journey through the Universe</h3>
+      <p class="project-description" data-key="aboutProject.description">
+        The project presents an interactive journey through space, showing planets, celestial objects, and space scenes built with modern web technologies, including Three.js and WebGL. It includes realistic textures, smooth orbital movement, dynamic lighting, and an easy-to-use interface for exploring information about planets and the universe. The project combines education, design, and an immersive visual experience into one interactive space exploration.
+      </p>
+      <div class="project-tech">
+        <span class="tech-badge">Three.js</span>
+        <span class="tech-badge">WebGL</span>
+        <span class="tech-badge">JavaScript</span>
+        <span class="tech-badge">GLSL Shaders</span>
+      </div>
+      <p class="project-note" data-key="aboutProject.note">Strona została wykonana na potrzeby konkursu "Kreator"</p>
+    </div>
+  </section>
+
+  <!-- Sources -->
+  <section id="sources" class="section">
+    <h2 class="section-title" data-key="sources.title">Sources &amp; References</h2>
+    <div class="section-divider"></div>
+    <ul class="sources-list">
+      <li class="source-item">
+        <a href="https://www.solarsystemscope.com/textures/" target="_blank" rel="noopener" class="source-link">
+          <span class="source-label" data-key="sources.items.0.label">Planet Textures</span>
+          <span class="source-arrow">→</span>
+        </a>
+      </li>
+      <li class="source-item">
+        <a href="https://github.com/SaraRasoulian/3D-Earth/blob/main/" target="_blank" rel="noopener" class="source-link">
+          <span class="source-label" data-key="sources.items.1.label">GitHub Repository — 3D planet visualization in Three.js</span>
+          <span class="source-arrow">→</span>
+        </a>
+      </li>
+      <li class="source-item">
+        <a href="https://github.com/pickles976/GalaxyThreeJS" target="_blank" rel="noopener" class="source-link">
+          <span class="source-label" data-key="sources.items.2.label">GitHub Repository — Milky Way galaxy visualization in Three.js</span>
+          <span class="source-arrow">→</span>
+        </a>
+      </li>
+      <li class="source-item">
+        <a href="https://en.wikipedia.org/wiki/Solar_System" target="_blank" rel="noopener" class="source-link">
+          <span class="source-label" data-key="sources.items.3.label">Wikipedia — astronomy and planetary information</span>
+          <span class="source-arrow">→</span>
+        </a>
+      </li>
+      <li class="source-item">
+        <a href="https://threejs.org/docs/" target="_blank" rel="noopener" class="source-link">
+          <span class="source-label" data-key="sources.items.4.label">Three.js Documentation</span>
+          <span class="source-arrow">→</span>
+        </a>
+      </li>
+      <li class="source-item">
+        <a href="https://zsjelcz.pl/" target="_blank" rel="noopener" class="source-link">
+          <span class="source-label" data-key="sources.items.5.label">Zespół Szkół im. Jana Kasprowicza w Jelcz-Laskowicach</span>
+          <span class="source-arrow">→</span>
+        </a>
+      </li>
+      <li class="source-item">
+        <a href="https://zsjelcz.pl/upload/pliki/regulamin-2026-7a9af283.pdf" target="_blank" rel="noopener" class="source-link">
+          <span class="source-label" data-key="sources.items.6.label">“Kreator” Competition Regulations PDF</span>
+          <span class="source-arrow">→</span>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p data-key="footer.text">© 2026 Bespalova Solomiia — The website was created for the "Kreator" competition.</p><br>
+    <p data-key="footer.copyright">© All rights reserved</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="./js/data.js"></script>
+  <script type="module">
+    import { initSiteI18n } from '../shared/i18n.js';
+    initSiteI18n({ langSwitch: false, footer: false });
+  </script>
+  <script src="./js/main.js"></script>
+  
+<!-- Back Button -->
+<button class="back-btn" onclick="history.back()" data-key="nav.back">← BACK</button>
+
+</body>
+</html>

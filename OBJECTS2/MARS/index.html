@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>My first three.js app</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+		overflow-y: hidden;
+      }
+    </style>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.161/build/three.module.js",
+          "jsm/": "https://cdn.jsdelivr.net/npm/three@0.161/examples/jsm/"
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="../../shared/navigation.css" />
+    <link rel="stylesheet" href="../planetHud.css" />
+  </head>
+  <body>
+    <script type="module" src="main.js"></script>
+
+    <!-- Planet HUD System -->
+    <script type="module">
+      import { PlanetHUD } from '../planetHud.js';
+      const hud = new PlanetHUD();
+      hud.show('mars');
+    </script>
+
+    <!-- Navigation System -->
+    <script type="module">
+      import Navigation from '../../shared/navigation.js';
+      const nav = new Navigation({
+        aboutLink: '../../ABOUTPROJECT/index.html',
+        currentScene: 'PLANET_DETAIL',
+        currentPlanet: 'mars'
+      });
+    </script>
+  </body>
+</html>

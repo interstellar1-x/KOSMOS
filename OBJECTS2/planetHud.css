@@ -1,0 +1,447 @@
+/* ===============================================
+   KOSMOS — Planet HUD Overlay System
+   NASA-style cinematic HUD around centered 3D planet
+   =============================================== */
+
+/* ── HUD Root (overlay container) ── */
+.planet-hud-root {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.planet-hud-root.visible {
+  opacity: 1;
+}
+
+/* ── Language switch (EN | PL) ── */
+.planet-hud-lang-switch {
+  position: absolute;
+  top: 24px;
+  right: 32px;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  pointer-events: auto;
+}
+
+.planet-hud-lang-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  font-family: 'Helvetica', Arial, sans-serif;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  padding: 4px 8px;
+  transition: color 0.3s ease;
+}
+
+.planet-hud-lang-btn:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.planet-hud-lang-btn.active {
+  color: #8ed0ff;
+}
+
+.planet-hud-lang-divider {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+/* ── Top Center: Title ── */
+.planet-hud-title {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 110;
+  pointer-events: none;
+}
+
+.planet-hud-title h1 {
+  margin: 0;
+  font-family: 'Helvetica', Arial, sans-serif;
+  font-size: clamp(32px, 5vw, 72px);
+  font-weight: 300;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-shadow:
+        0 0 10px rgba(255,255,255,0.7),
+        0 0 20px rgba(255,255,255,0.5),
+        0 0 40px rgba(100,150,255,0.5);
+  animation: hudTitleFadeIn 1.2s ease-out forwards;
+  opacity: 0;
+}
+
+.planet-hud-title .planet-type {
+  font-size: clamp(10px, 1.2vw, 16px);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: rgba(140, 200, 255, 0.7);
+  margin-top: 8px;
+  font-weight: 400;
+  animation: hudFadeIn 1.5s ease-out 0.3s forwards;
+  opacity: 0;
+}
+
+@keyframes hudTitleFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hudFadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes hudSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Bottom Left: Tech Data Panel ── */
+.planet-hud-tech {
+  position: absolute;
+  bottom: 10%;
+  left: 3%;
+  width: min(340px, 32vw);
+  z-index: 110;
+  pointer-events: auto;
+  background: rgba(4, 12, 30, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(100, 180, 255, 0.08);
+  border-radius: 12px;
+  padding: 20px 22px;
+  animation: hudSlideUp 0.8s ease-out 0.2s forwards;
+  opacity: 0;
+}
+
+.planet-hud-tech .panel-label {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(140, 200, 255, 0.5);
+  margin-bottom: 14px;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(100, 180, 255, 0.1);
+  padding-bottom: 8px;
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 18px;
+}
+
+.tech-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.tech-item.full-width {
+  grid-column: 1 / -1;
+}
+
+.tech-label {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(140, 200, 255, 0.5);
+  font-weight: 500;
+  font-family: 'Helvetica', Arial, sans-serif;
+}
+
+.tech-value {
+  font-size: 15px;
+  color: #e0edff;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  line-height: 1.4;
+  font-family: 'Helvetica', Arial, sans-serif;
+}
+
+/* ── Bottom Right: Description + Facts Panel ── */
+.planet-hud-info {
+  position: absolute;
+  bottom: 10%;
+  right: 3%;
+  width: min(420px, 40vw);
+  max-height: 55vh;
+  z-index: 110;
+  pointer-events: auto;
+  background: rgba(4, 12, 30, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(100, 180, 255, 0.08);
+  border-radius: 12px;
+  padding: 22px 24px;
+  animation: hudSlideUp 0.8s ease-out 0.4s forwards;
+  opacity: 0;
+  overflow-y: auto;
+  font-family: 'Helvetica', Arial, sans-serif;
+}
+
+/* Custom scrollbar for info panel */
+.planet-hud-info::-webkit-scrollbar {
+  width: 4px;
+}
+.planet-hud-info::-webkit-scrollbar-track {
+  background: transparent;
+}
+.planet-hud-info::-webkit-scrollbar-thumb {
+  background: rgba(100, 180, 255, 0.2);
+  border-radius: 4px;
+}
+
+.planet-hud-info .panel-label {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(140, 200, 255, 0.5);
+  margin-bottom: 12px;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(100, 180, 255, 0.1);
+  padding-bottom: 8px;
+}
+
+.hud-description {
+  font-size: 16px;
+  color: rgba(210, 225, 245, 0.85);
+  line-height: 1.7;
+  font-weight: 300;
+  margin-bottom: 18px;
+  font-family: 'Helvetica', Arial, sans-serif;
+}
+
+.hud-facts-title {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(140, 200, 255, 0.5);
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.hud-facts-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hud-facts-list li {
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: rgba(200, 215, 240, 0.8);
+  line-height: 1.6;
+  font-weight: 300;
+  font-family: 'Helvetica', Arial, sans-serif;
+}
+
+.hud-facts-list li::before {
+  content: '◆';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: rgba(100, 180, 255, 0.4);
+  font-size: 9px;
+  line-height: 1.8;
+}
+
+/* ── Back button positioned at bottom-center for planet detail pages ── */
+.planet-hud-root .back-button {
+  bottom: 3%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 110;
+  animation: hudFadeIn 1s ease-out 0.6s forwards;
+  opacity: 0;
+}
+
+/* ── Entry accent line (subtle glow accent on panels) ── */
+.planet-hud-tech::before,
+.planet-hud-info::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(100, 180, 255, 0.3) 50%,
+    transparent
+  );
+}
+
+/* ── Scanline separator ── */
+.hud-separator {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(100, 180, 255, 0.15) 50%,
+    transparent
+  );
+  margin: 16px 0;
+}
+
+/* ── Responsive: Tablet ── */
+@media (max-width: 1024px) {
+  .planet-hud-tech {
+    width: min(280px, 35vw);
+    padding: 16px 18px;
+    bottom: 4%;
+    left: 2%;
+  }
+
+  .planet-hud-info {
+    width: min(340px, 42vw);
+    padding: 18px 20px;
+    bottom: 4%;
+    right: 2%;
+    max-height: 50vh;
+  }
+
+  .planet-hud-title h1 {
+    letter-spacing: 6px;
+  }
+
+  .tech-grid {
+    gap: 6px 12px;
+  }
+
+  .tech-value {
+    font-size: 12px;
+  }
+}
+
+/* ── Responsive: Mobile ── */
+@media (max-width: 768px) {
+  .planet-hud-title {
+    top: 3%;
+  }
+
+  .planet-hud-title h1 {
+    font-size: clamp(24px, 6vw, 38px);
+    letter-spacing: 4px;
+  }
+
+  .planet-hud-tech {
+    width: calc(50% - 12px);
+    max-width: none;
+    bottom: 2%;
+    left: 1%;
+    padding: 12px 14px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .planet-hud-tech .panel-label {
+    font-size: 8px;
+    margin-bottom: 10px;
+  }
+
+  .tech-grid {
+    gap: 4px 8px;
+  }
+
+  .tech-label {
+    font-size: 7px;
+    letter-spacing: 1px;
+  }
+
+  .tech-value {
+    font-size: 10px;
+  }
+
+  .planet-hud-info {
+    width: calc(50% - 12px);
+    max-width: none;
+    bottom: 2%;
+    right: 1%;
+    padding: 12px 14px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    max-height: 45vh;
+  }
+
+  .planet-hud-info .panel-label {
+    font-size: 8px;
+    margin-bottom: 8px;
+  }
+
+  .hud-description {
+    font-size: 11px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+  }
+
+  .hud-facts-title {
+    font-size: 8px;
+  }
+
+  .hud-facts-list li {
+    font-size: 10px;
+    padding-left: 14px;
+    margin-bottom: 6px;
+  }
+
+  .hud-facts-list li::before {
+    font-size: 6px;
+  }
+}
+
+/* ── Responsive: Small Mobile ── */
+@media (max-width: 768px) {
+  .planet-hud-lang-switch {
+    top: 16px;
+    right: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .planet-hud-tech {
+    display: none;
+  }
+
+  .planet-hud-info {
+    width: calc(100% - 12px);
+    max-height: 35vh;
+    bottom: 2%;
+    left: 1%;
+    right: 1%;
+  }
+
+  .planet-hud-title h1 {
+    font-size: 20px;
+    letter-spacing: 2px;
+  }
+}

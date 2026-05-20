@@ -1,0 +1,91 @@
+import * as THREE from "three";
+import { OrbitControls } from "jsm/controls/OrbitControls.js";
+import getStarfield from "./getStarfield.js";
+import { getFresnelMat } from "./getFresnelMat.js";
+
+const NEPTUNE_SURFACE = "./neptune.jpg";
+
+function loadTextureAsync(loader, url) {
+  return new Promise((resolve, reject) => {
+    loader.load(url, resolve, undefined, reject);
+  });
+}
+
+async function init() {
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+  camera.position.z = 5;
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setSize(width, height);
+
+  document.body.appendChild(renderer.domElement);
+
+  THREE.ColorManagement.enabled = true;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.35;
+  renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
+
+  const neptuneGroup = new THREE.Group();
+  neptuneGroup.rotation.z = (-25.19 * Math.PI) / 180;
+  scene.add(neptuneGroup);
+
+  new OrbitControls(camera, renderer.domElement);
+
+  const loader = new THREE.TextureLoader();
+  loader.setCrossOrigin("anonymous");
+
+  const marsTex = await loadTextureAsync(loader, NEPTUNE_SURFACE);
+  marsTex.colorSpace = THREE.SRGBColorSpace;
+
+  const geometry = new THREE.IcosahedronGeometry(1, 14);
+  const material = new THREE.MeshPhongMaterial({
+    map: marsTex,
+    shininess: 15,
+    specular: new THREE.Color(0x222222),
+  });
+  const marsMesh = new THREE.Mesh(geometry, material);
+  neptuneGroup.add(marsMesh);
+
+  const fresnelMat = getFresnelMat({
+    rimHex: 0xd4a574,
+    facingHex: 0x000000,
+  });
+  const glowMesh = new THREE.Mesh(geometry, fresnelMat);
+  glowMesh.scale.setScalar(1.01);
+  neptuneGroup.add(glowMesh);
+
+  const stars = getStarfield({ numStars: 5000 });
+  scene.add(stars);
+
+  const sunLight = new THREE.DirectionalLight(0xffffff, 3.2);
+  sunLight.position.set(-2.2, 0.7, 1.6);
+  scene.add(sunLight);
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.42));
+  scene.add(new THREE.HemisphereLight(0xffc9a8, 0x1f1814, 0.55));
+
+  function animate() {
+    requestAnimationFrame(animate);
+    marsMesh.rotation.y += 0.0019;
+    glowMesh.rotation.y += 0.002;
+    stars.rotation.y -= 0.0002;
+    renderer.render(scene, camera);
+  }
+
+  animate();
+
+  function handleWindowResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  }
+  window.addEventListener("resize", handleWindowResize, false);
+}
+
+init().catch((err) => {
+  console.error(err);
+});

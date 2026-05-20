@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOSMOS</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../shared/navigation.css">
+</head>
+<body>
+
+    <!-- HERO SECTION -->
+    <section id="hero">
+
+        <!-- THREE.JS CANVAS -->
+        <canvas id="space-canvas"></canvas>
+
+        <!-- CENTER TEXT -->
+        <div class="hero-content">
+            <h1 data-i18n="landing.title">KOSMOS</h1>
+            <p data-i18n="landing.subtitle">Interactive journey through the Universe</p>
+        </div>
+
+    </section>
+
+
+    <!-- THREE.JS -->
+    <script type="module" src="js/main.js"></script>
+
+    <!-- Navigation System -->
+    <script type="module">
+      import Navigation from '../shared/navigation.js';
+      
+      const nav = new Navigation({
+        aboutLink: '../ABOUTPROJECT/index.html',
+        currentScene: 'LANDING'
+      });
+    </script>
+
+</body>
+</html>
